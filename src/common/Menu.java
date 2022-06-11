@@ -51,7 +51,7 @@ public class Menu implements Option, Serializable {
     private int GetOption() {
         int opt = -1;
         while(!IsValidOption(opt)) {
-            System.out.print("Please input your option:");
+            System.out.print("Input your option:");
             Scanner sc = new Scanner(System.in);
             opt = sc.nextInt();
         }

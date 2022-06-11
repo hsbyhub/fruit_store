@@ -3,6 +3,7 @@ package fruit_store;
 import common.Menu;
 
 import java.io.*;
+import java.rmi.server.ExportException;
 
 public class FruitStore extends Menu {
     String file;
@@ -25,15 +26,11 @@ public class FruitStore extends Menu {
             if (fruitStore == null) {
                 fruitStore = new FruitStore(file);
             }
-            fruitStore.file = file;
             is.close();
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             fruitStore = new FruitStore(file);
-        } catch (IOException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException e) {
-            System.out.println(e);
         }
+        fruitStore.file = file;
         return fruitStore;
     }
 
@@ -42,9 +39,7 @@ public class FruitStore extends Menu {
             ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(this.file));
             os.writeObject(this);
             os.close();
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
