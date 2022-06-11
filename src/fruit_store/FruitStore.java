@@ -15,7 +15,7 @@ public class FruitStore extends Menu {
 
     @Override
     public String Name() {
-        return "梦海水果店";
+        return "Fine水果店";
     }
 
     public static FruitStore read(String file) {
