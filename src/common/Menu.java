@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Menu implements IOption, Serializable {
-    ArrayList<IOption> options;
+public class Menu implements Option, Serializable {
+    ArrayList<Option> options;
 
     public Menu() {
         options = new ArrayList<>();
@@ -14,8 +14,8 @@ public class Menu implements IOption, Serializable {
     @Override
     public int run(Object obj) {
         while(true) {
-            System.out.println("============" + Name() + "============");
-            Header();
+            System.out.println("============" + name() + "============");
+            header();
             ShowOptions();
             int opt = GetOption();
             if (opt == 0) {
@@ -27,23 +27,23 @@ public class Menu implements IOption, Serializable {
     }
 
     @Override
-    public String Name() {
+    public String name() {
         return "Menu";
     }
 
     @Override
-    public void Header() {
+    public void header() {
 
     }
 
-    public void RegisterOption (IOption opt) {
+    public void RegisterOption (Option opt) {
         options.add(opt);
     }
 
     private void ShowOptions() {
         System.out.println();
         for(int i = 0; i < options.size(); i++) {
-            System.out.println("" + (i + 1) + "." + options.get(i).Name());
+            System.out.println("" + (i + 1) + "." + options.get(i).name());
         }
         System.out.println("0" + "." + "退出");
     }

@@ -1,6 +1,6 @@
 package fruit_store;
 
-import common.IOption;
+import common.Option;
 import common.Menu;
 
 import java.io.Serializable;
@@ -16,7 +16,7 @@ public class FruitTypeManager extends Menu {
     }
 
     @Override
-    public void Header() {
+    public void header() {
         System.out.println("当前水果类型:");
         for (int i = 0; i < fruitTypes.size(); i++) {
             System.out.println(""+i+"."+fruitTypes.get(i));
@@ -24,7 +24,7 @@ public class FruitTypeManager extends Menu {
     }
 
     @Override
-    public String Name() {
+    public String name() {
         return "水果类型管理";
     }
 
@@ -49,7 +49,7 @@ public class FruitTypeManager extends Menu {
 
 }
 
-class OptionAddFruitType implements IOption, Serializable{
+class OptionAddFruitType implements Option, Serializable{
     FruitTypeManager fruitTypeManager;
 
     public OptionAddFruitType(FruitTypeManager fruitTypeManager) {
@@ -69,12 +69,12 @@ class OptionAddFruitType implements IOption, Serializable{
     }
 
     @Override
-    public String Name() {
+    public String name() {
         return "添加水果类型";
     }
 
     @Override
-    public void Header() {
+    public void header() {
     }
 }
 

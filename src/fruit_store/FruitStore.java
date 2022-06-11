@@ -13,7 +13,7 @@ public class FruitStore extends Menu {
     }
 
     @Override
-    public String Name() {
+    public String name() {
         return "Fine水果店";
     }
 
