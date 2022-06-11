@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu implements Option, Serializable {
-    ArrayList<Option> options;
+    private ArrayList<Option> options;
 
     public Menu() {
         options = new ArrayList<>();

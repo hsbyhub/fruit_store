@@ -6,7 +6,7 @@ import java.io.*;
 import java.rmi.server.ExportException;
 
 public class FruitStore extends Menu {
-    String file;
+    private String file;
 
     public FruitStore(String file) {
         this.file = file;
