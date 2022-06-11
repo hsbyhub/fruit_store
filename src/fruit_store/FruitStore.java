@@ -1,7 +1,6 @@
 package fruit_store;
 
-import fruit.FruitTypeManager;
-import menu.Menu;
+import common.Menu;
 
 import java.io.*;
 

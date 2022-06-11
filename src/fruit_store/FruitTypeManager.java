@@ -1,7 +1,7 @@
-package fruit;
+package fruit_store;
 
-import menu.IOption;
-import menu.Menu;
+import common.IOption;
+import common.Menu;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,9 +1,6 @@
-package fruit;
-
-import menu.Menu;
+package fruit_store;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class FruitManager {
     private HashMap<Integer, Integer> fruit_count;

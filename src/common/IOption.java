@@ -1,4 +1,4 @@
-package menu;
+package common;
 
 public interface IOption {
     int run(Object obj);
