@@ -1,7 +1,7 @@
 package module;
 
-import manager.FruitManager;
-import manager.FruitTypeManager;
+import logic.FruitManager;
+import logic.FruitTypeManager;
 import menu.Menu;
 import menu.Option;
 
@@ -40,7 +40,7 @@ class OptionAddFruitStock extends Option {
     }
 
     @Override
-    public int onHandler() {
+    public String onHandler() {
         System.out.println("正在添加库存...");
         fruitTypeManager.show();
         int id = -1;
@@ -50,25 +50,21 @@ class OptionAddFruitStock extends Option {
             System.out.print("类型编号:");
             id = sc.nextInt();
             if (fruitTypeManager.getFruitType(id) == null) {
-                System.out.println("找不到该水果类型!");
-                return -1;
+                return "找不到该水果类型";
             }
             System.out.print("数量:");
             count = sc.nextInt();
             if (count <= 0) {
-                System.out.println("无效数量!");
-                return -1;
+                return "无效数量!";
             }
         }catch (Exception e) {
-            System.out.println("无效参数");
+            return "无效参数";
         }
         boolean ok = fruitManager.AdjustFruit(id, count);
-        if (ok) {
-            System.out.println("添加成功!");
-        } else {
-            System.out.println("添加失败!");
+        if (!ok) {
+            return "添加失败";
         }
-        return 0;
+        return "添加成功";
     }
 
     @Override

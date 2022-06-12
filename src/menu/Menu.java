@@ -7,10 +7,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu extends Option implements IMenu, Serializable {
+    private String top;
+    private String bottom;
     private ArrayList<Option> options;
 
     public Menu(FruitStore fruitStore) {
         super(fruitStore);
+        top = "===============" + name() + "===============";
+        bottom = "";
+        for (int i = 0; i < top.length(); i++) {
+            bottom += "=";
+        }
         options = new ArrayList<>();
     }
 
@@ -29,7 +36,7 @@ public class Menu extends Option implements IMenu, Serializable {
     private int getOption() {
         int opt = -1;
         while(!IsValidOption(opt)) {
-            System.out.print("Input your option:");
+            System.out.print("Select:");
             Scanner sc = new Scanner(System.in);
             opt = sc.nextInt();
         }
@@ -41,18 +48,23 @@ public class Menu extends Option implements IMenu, Serializable {
     }
 
     @Override
-    public int onHandler() {
+    public String onHandler() {
+        String res = null;
         while(true) {
-            System.out.println("===============" + name() + "===============");
+            if (res != null) {
+                System.out.println(res);
+            }
+            System.out.println(top);
             showHeader();
             showOptions();
+            System.out.println(bottom);
             int opt = getOption();
             if (opt == 0) {
                 break;
             }
-            options.get(opt-1).handler();
+            res = options.get(opt-1).handler();
         }
-        return 0;
+        return "返回";
     }
 
     @Override

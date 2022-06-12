@@ -1,6 +1,7 @@
 package module;
 
-import manager.FruitTypeManager;
+import logic.FruitType;
+import logic.FruitTypeManager;
 import menu.Menu;
 import menu.Option;
 
@@ -36,21 +37,26 @@ class OptionAddFruitType extends Option implements Serializable {
     }
 
     @Override
-    public int onHandler() {
+    public String onHandler() {
         System.out.println("正在添加水果...");
         Scanner sc = new Scanner(System.in);
         System.out.print("水果名称:");
         String name = sc.next();
-        System.out.print("价格:");
         float price = 0;
+        float purPrice = 0;
         try {
+            System.out.print("价格:");
             price = sc.nextFloat();
+            System.out.print("进货价格:");
+            purPrice = sc.nextFloat();
+            if (price <= 0 || purPrice <= 0 || price <= purPrice) {
+                return "添加水果失败，非法价格格式";
+            }
         } catch (Exception e) {
-            System.out.println("添加水果失败，非法价格格式");
-            return 0;
+            return "添加水果失败，非法价格格式";
         }
-        getFruitStore().getFruitTypeManager().addFruitType(name, price);
-        return 0;
+        FruitType fruitType = getFruitStore().getFruitTypeManager().addFruitType(name, price, purPrice);
+        return fruitType.toString() + " 添加成功";
     }
 
     @Override

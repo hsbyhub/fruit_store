@@ -1,8 +1,8 @@
 package module;
 
-import manager.CustomerManager;
-import manager.FruitManager;
-import manager.FruitTypeManager;
+import logic.CustomerManager;
+import logic.FruitManager;
+import logic.FruitTypeManager;
 import menu.Menu;
 
 import java.io.*;
@@ -43,9 +43,10 @@ public class FruitStore extends Menu {
 
     @Override
     public void showHeader() {
-        System.out.println("----------货架--------");
+        System.out.println("货架");
+        System.out.println("----------------------------");
         fruitStockManager.show();
-        System.out.println("----------------------");
+        System.out.println("----------------------------");
     }
 
     public static FruitStore read(String file) {

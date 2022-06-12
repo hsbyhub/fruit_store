@@ -1,10 +1,9 @@
-package manager;
+package logic;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 // 账户
-public class AccountManager implements Serializable {
+public class Account implements Serializable {
     private float balance;
 
     public boolean AdjustBalance(float count) {
@@ -14,5 +13,15 @@ public class AccountManager implements Serializable {
         }
         balance = tmp;
         return true;
+    }
+
+    public float getBalance() {
+        return balance;
+    }
+
+    @Override
+    public String toString() {
+        String str = String.format("%.2f", balance);
+        return "$" + str;
     }
 }

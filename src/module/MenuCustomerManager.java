@@ -2,8 +2,8 @@ package module;
 
 import menu.Menu;
 import menu.Option;
-import manager.Customer;
-import manager.CustomerManager;
+import logic.Customer;
+import logic.CustomerManager;
 
 import java.io.Serializable;
 import java.util.Scanner;
@@ -37,7 +37,7 @@ class OptionAddCustomer extends Option implements Serializable {
     }
 
     @Override
-    public int onHandler() {
+    public String onHandler() {
         System.out.println("正在添加客户...");
         Scanner sc = new Scanner(System.in);
         System.out.print("客户名:");
@@ -49,13 +49,10 @@ class OptionAddCustomer extends Option implements Serializable {
             int tmp = sc.nextInt();
             type = Customer.Type.values()[tmp];
         } catch (Exception e) {
-            System.out.println("无效用户类型!");
-            return -1;
+            return "无效用户类型!";
         }
         Customer customer = customerManager.AddCustomer(name, type);
-        System.out.println("添加用户成功:");
-        System.out.println(customer);
-        return 0;
+        return "添加用户成功：" + customer;
     }
 
     @Override

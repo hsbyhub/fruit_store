@@ -1,11 +1,11 @@
-package manager;
+package logic;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FruitTypeManager implements Serializable {
-    private int generateFruitTypeId = 1000;
+    private int generateFruitTypeId = 100;
     private HashMap<Integer, FruitType> fruitTypes;
 
     public FruitTypeManager() {
@@ -19,24 +19,18 @@ public class FruitTypeManager implements Serializable {
         }
     }
 
-    public int addFruitType(String name, float price) {
+    public FruitType addFruitType(String name, float price, float purchasePrice) {
         int id = generateFruitTypeId++;
-        fruitTypes.put(id, new FruitType(id, name, price));
-        return id;
+        FruitType fruitType = new FruitType(id, name, price, purchasePrice);
+        fruitTypes.put(id, fruitType);
+        return fruitType;
     }
 
     public boolean deleteFruitType(int id) {
-        if (!fruitTypes.containsKey(id)) {
-            return false;
-        }
-        fruitTypes.remove(id);
-        return true;
+        return fruitTypes.remove(id) != null;
     }
 
     public FruitType getFruitType(int id) {
-        if (!fruitTypes.containsKey(id)) {
-            return null;
-        }
         return fruitTypes.get(id);
     }
 

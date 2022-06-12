@@ -15,17 +15,17 @@ public class Option implements IOption, Serializable {
         return fruitStore;
     }
 
-    public int handler() {
+    public String handler() {
         util.Console.clean();
-        int res = onHandler();
+        String res = onHandler();
         util.Console.clean();
         fruitStore.write();
         return res;
     }
 
     @Override
-    public int onHandler() {
-        return 0;
+    public String onHandler() {
+        return null;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package manager;
+package logic;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -26,13 +26,13 @@ public class Customer implements Serializable {
     private String id;
     private String name;
     private Type type;
-    private AccountManager accountManager;
+    private Account account;
 
     public Customer(String id, String name, Type type) {
         this.id = id;
         this.name = name;
         this.type = type;
-        this.accountManager = new AccountManager();
+        this.account= new Account();
     }
 
     double getDistant() {
@@ -43,12 +43,12 @@ public class Customer implements Serializable {
         return name;
     }
 
-    public AccountManager getAccountManager() {
-        return accountManager;
+    public Account getAccount() {
+        return account;
     }
 
     @Override
     public String toString() {
-        return "Id:" + id + " 名称:" + name + " 类型:" + type;
+        return "Id:" + id + " 名称:" + name + " 类型:" + type + " 账户余额:" + account;
     }
 }

@@ -1,6 +1,6 @@
 package menu;
 
 public interface IOption {
-    int onHandler();
+    String onHandler();
     String name();
 }
