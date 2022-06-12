@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class CustomerManager implements Serializable {
-    private static int customerIdSeq = 0;
+    private int customerIdSeq = 0;
     private ArrayList<Customer> customers;
 
     public CustomerManager() {

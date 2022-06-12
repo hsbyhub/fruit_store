@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitTypeManager implements Serializable {
-    static int generateFruitTypeId = 1000;
+    private int generateFruitTypeId = 1000;
     private HashMap<Integer, FruitType> fruitTypes;
 
     public FruitTypeManager() {
