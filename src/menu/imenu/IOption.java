@@ -1,4 +1,4 @@
-package imenu;
+package menu.imenu;
 
 public interface IOption {
     int handler();

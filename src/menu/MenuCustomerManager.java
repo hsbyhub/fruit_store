@@ -1,6 +1,6 @@
 package menu;
 
-import imenu.IOption;
+import menu.imenu.IOption;
 import manager.customer.Customer;
 import manager.customer.CustomerManager;
 

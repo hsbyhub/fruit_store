@@ -1,7 +1,7 @@
 package menu;
 
-import imenu.IMenu;
-import imenu.IOption;
+import menu.imenu.IMenu;
+import menu.imenu.IOption;
 
 import java.io.Serializable;
 import java.util.ArrayList;
