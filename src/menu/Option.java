@@ -16,7 +16,9 @@ public class Option implements IOption, Serializable {
     }
 
     public int handler() {
+        util.Console.clean();
         int res = onHandler();
+        util.Console.clean();
         fruitStore.write();
         return res;
     }
