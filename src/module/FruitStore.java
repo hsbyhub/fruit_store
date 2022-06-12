@@ -41,6 +41,13 @@ public class FruitStore extends Menu {
         return "Fine水果店";
     }
 
+    @Override
+    public void showHeader() {
+        System.out.println("----------货架--------");
+        fruitStockManager.show();
+        System.out.println("----------------------");
+    }
+
     public static FruitStore read(String file) {
         FruitStore fruitStore = null;
         try {

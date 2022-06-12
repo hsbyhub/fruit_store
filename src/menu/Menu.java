@@ -43,7 +43,7 @@ public class Menu extends Option implements IMenu, Serializable {
     @Override
     public int onHandler() {
         while(true) {
-            System.out.println("============" + name() + "============");
+            System.out.println("===============" + name() + "===============");
             showHeader();
             showOptions();
             int opt = getOption();
