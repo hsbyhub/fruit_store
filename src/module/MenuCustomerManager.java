@@ -1,6 +1,7 @@
-package menu;
+package module;
 
-import menu.imenu.IOption;
+import menu.Menu;
+import menu.Option;
 import manager.Customer;
 import manager.CustomerManager;
 
@@ -13,7 +14,7 @@ public class MenuCustomerManager extends Menu {
     public MenuCustomerManager(FruitStore fruitStore) {
         super(fruitStore);
         this.customerManager = fruitStore.getCustomerManager();
-        registerOption(new OptionAddCustomer(this.customerManager));
+        registerOption(new OptionAddCustomer(fruitStore));
     }
 
     @Override
@@ -27,15 +28,16 @@ public class MenuCustomerManager extends Menu {
     }
 }
 
-class OptionAddCustomer implements IOption, Serializable {
+class OptionAddCustomer extends Option implements Serializable {
     CustomerManager customerManager;
 
-    public OptionAddCustomer(CustomerManager customerManager) {
-        this.customerManager = customerManager;
+    public OptionAddCustomer(FruitStore fruitStore) {
+        super(fruitStore);
+        this.customerManager = fruitStore.getCustomerManager();
     }
 
     @Override
-    public int handler() {
+    public int onHandler() {
         System.out.println("正在添加客户...");
         Scanner sc = new Scanner(System.in);
         System.out.print("客户名:");

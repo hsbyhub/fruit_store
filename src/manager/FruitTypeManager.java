@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitTypeManager implements Serializable {
-    static int generateFruitTypeId = 0;
+    static int generateFruitTypeId = 1000;
     private HashMap<Integer, FruitType> fruitTypes;
 
     public FruitTypeManager() {
@@ -72,6 +72,6 @@ class FruitType implements Serializable{
     @Override
     public String toString() {
         String priceStr = String.format("%.2f", price);
-        return id + ". " + name + " $" + priceStr;
+        return "编号:" + id + " 名称:" + name + " 价格:" + priceStr;
     }
 }

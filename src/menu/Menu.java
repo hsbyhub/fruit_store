@@ -1,25 +1,25 @@
 package menu;
 
-import menu.imenu.IMenu;
-import menu.imenu.IOption;
+import module.FruitStore;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Menu extends Option implements Serializable, IMenu {
-    private ArrayList<IOption> options;
+public class Menu extends Option implements IMenu, Serializable {
+    private ArrayList<Option> options;
 
     public Menu(FruitStore fruitStore) {
         super(fruitStore);
         options = new ArrayList<>();
     }
 
-    public void registerOption(IOption opt) {
+    public void registerOption(Option opt) {
         options.add(opt);
     }
 
     private void showOptions() {
+        System.out.println();
         for(int i = 0; i < options.size(); i++) {
             System.out.println("" + (i + 1) + "." + options.get(i).name());
         }
@@ -41,7 +41,7 @@ public class Menu extends Option implements Serializable, IMenu {
     }
 
     @Override
-    public int handler() {
+    public int onHandler() {
         while(true) {
             System.out.println("============" + name() + "============");
             showHeader();

@@ -1,7 +1,5 @@
 package manager;
 
-import manager.AccountManager;
-
 import java.io.Serializable;
 import java.util.HashMap;
 
@@ -51,8 +49,6 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return this.id + " " +
-                this.name + " " +
-                this.type;
+        return "Id:" + id + " 名称:" + name + " 类型:" + type;
     }
 }

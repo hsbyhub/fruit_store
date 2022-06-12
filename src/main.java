@@ -1,4 +1,4 @@
-import menu.FruitStore;
+import module.FruitStore;
 
 public class main {
     public static void main(String[] args) {
@@ -7,7 +7,6 @@ public class main {
         if (fruitStore == null) {
             fruitStore = new FruitStore(storage);
         }
-        fruitStore.handler();
-        fruitStore.write();
+        fruitStore.onHandler();
     }
 }

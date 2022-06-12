@@ -1,4 +1,4 @@
-package menu.imenu;
+package menu;
 
 public interface IMenu {
     void showHeader();

@@ -1,6 +1,6 @@
 package menu;
 
-import menu.imenu.IOption;
+import module.FruitStore;
 
 import java.io.Serializable;
 
@@ -15,8 +15,14 @@ public class Option implements IOption, Serializable {
         return fruitStore;
     }
 
-    @Override
     public int handler() {
+        int res = onHandler();
+        fruitStore.write();
+        return res;
+    }
+
+    @Override
+    public int onHandler() {
         return 0;
     }
 

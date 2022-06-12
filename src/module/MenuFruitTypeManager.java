@@ -1,11 +1,13 @@
-package menu;
+package module;
 
 import manager.FruitTypeManager;
+import menu.Menu;
+import menu.Option;
 
 import java.io.Serializable;
 import java.util.Scanner;
 
-public class MenuFruitTypeManager extends Menu{
+public class MenuFruitTypeManager extends Menu {
 
     private FruitTypeManager fruitTypeManager;
 
@@ -34,7 +36,7 @@ class OptionAddFruitType extends Option implements Serializable {
     }
 
     @Override
-    public int handler() {
+    public int onHandler() {
         System.out.println("正在添加水果...");
         Scanner sc = new Scanner(System.in);
         System.out.print("水果名称:");
