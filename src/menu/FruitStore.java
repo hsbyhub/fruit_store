@@ -1,6 +1,6 @@
 package menu;
 
-import manager.customer.CustomerManager;
+import manager.CustomerManager;
 import manager.FruitTypeManager;
 
 import java.io.*;
@@ -37,12 +37,9 @@ public class FruitStore extends Menu {
         try {
             ObjectInputStream is = new ObjectInputStream(new FileInputStream(file));
             fruitStore = (FruitStore)(is.readObject());
-            if (fruitStore == null) {
-                fruitStore = new FruitStore(file);
-            }
             is.close();
         } catch (Exception e) {
-            fruitStore = new FruitStore(file);
+            System.out.println(e);
         }
         return fruitStore;
     }

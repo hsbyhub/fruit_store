@@ -1,4 +1,4 @@
-package manager.customer;
+package manager;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;

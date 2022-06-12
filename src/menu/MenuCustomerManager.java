@@ -1,8 +1,8 @@
 package menu;
 
 import menu.imenu.IOption;
-import manager.customer.Customer;
-import manager.customer.CustomerManager;
+import manager.Customer;
+import manager.CustomerManager;
 
 import java.io.Serializable;
 import java.util.Scanner;
