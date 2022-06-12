@@ -1,16 +1,30 @@
-package fruit_store;
+package menu;
 
-import common.Menu;
+import manager.customer.CustomerManager;
+import manager.FruitTypeManager;
 
 import java.io.*;
-import java.rmi.server.ExportException;
 
 public class FruitStore extends Menu {
     private String file;
+    FruitTypeManager fruitTypeManager;
+    CustomerManager customerManager;
 
     public FruitStore(String file) {
+        super(null);
         this.file = file;
-        RegisterOption(new FruitTypeManager());
+        this.fruitTypeManager = new FruitTypeManager();
+        this.customerManager = new CustomerManager();
+        registerOption(new MenuFruitTypeManager(this));
+        registerOption(new MenuCustomerManager(this));
+    }
+
+    public FruitTypeManager getFruitTypeManager() {
+        return fruitTypeManager;
+    }
+
+    public CustomerManager getCustomerManager() {
+        return customerManager;
     }
 
     @Override
@@ -30,7 +44,6 @@ public class FruitStore extends Menu {
         } catch (Exception e) {
             fruitStore = new FruitStore(file);
         }
-        fruitStore.file = file;
         return fruitStore;
     }
 

@@ -1,12 +1,13 @@
-import fruit_store.FruitStore;
+import menu.FruitStore;
 
 public class main {
     public static void main(String[] args) {
-        FruitStore fruitStore = FruitStore.read("fruit_store.file");
+        String storage = "storage.txt";
+        FruitStore fruitStore = FruitStore.read(storage);
         if (fruitStore == null) {
-            fruitStore = new FruitStore("fruit_store.file");
+            fruitStore = new FruitStore(storage);
         }
-        fruitStore.run(null);
+        fruitStore.handler();
         fruitStore.write();
     }
 }

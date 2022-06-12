@@ -1,11 +1,14 @@
-package fruit_store;
+package manager;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class FruitManager {
+// 账户
+public class AccountManager implements Serializable {
     private HashMap<Integer, Integer> fruit_count;
+    private float balance;
 
-    public FruitManager() {
+    public AccountManager() {
         fruit_count = new HashMap<>();
     }
 
@@ -21,5 +24,12 @@ public class FruitManager {
         return true;
     }
 
-
+    public boolean AdjustBalance(float count) {
+        float tmp = balance + count;
+        if (tmp < 0) {
+            return false;
+        }
+        balance = tmp;
+        return true;
+    }
 }
