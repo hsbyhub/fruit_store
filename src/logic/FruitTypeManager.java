@@ -34,5 +34,14 @@ public class FruitTypeManager implements Serializable {
         return fruitTypes.get(id);
     }
 
+    public FruitType getFruitTypeByName(String name) {
+        for (Map.Entry entry : fruitTypes.entrySet()) {
+            FruitType fruitType = (FruitType)entry.getValue();
+            if (fruitType.getName().equals(name)) {
+                return fruitType;
+            }
+        }
+        return null;
+    }
 }
 

@@ -1,8 +1,6 @@
 package module;
 
-import logic.CustomerManager;
-import logic.FruitManager;
-import logic.FruitTypeManager;
+import logic.*;
 import menu.Menu;
 
 import java.io.*;
@@ -12,6 +10,8 @@ public class FruitStore extends Menu {
     FruitTypeManager fruitTypeManager;
     CustomerManager customerManager;
     FruitManager fruitStockManager;
+    OrderManager orderManager;
+    Account account;
 
     public FruitStore(String file) {
         super(null);
@@ -19,6 +19,9 @@ public class FruitStore extends Menu {
         this.fruitTypeManager = new FruitTypeManager();
         this.customerManager = new CustomerManager();
         this.fruitStockManager = new FruitManager(this.fruitTypeManager);
+        this.orderManager = new OrderManager();
+        this.account = new Account();
+        registerOption(new MenuTrading(this));
         registerOption(new MenuFruitTypeManager(this));
         registerOption(new MenuCustomerManager(this));
         registerOption(new MenuFruitManager(this));
@@ -43,10 +46,11 @@ public class FruitStore extends Menu {
 
     @Override
     public void showHeader() {
-        System.out.println("货架");
-        System.out.println("----------------------------");
+        System.out.println("营收:" + account);
+        System.out.println("货架:");
+        System.out.println("---------------------------------------------------------------");
         fruitStockManager.show();
-        System.out.println("----------------------------");
+        System.out.println("---------------------------------------------------------------");
     }
 
     public static FruitStore read(String file) {

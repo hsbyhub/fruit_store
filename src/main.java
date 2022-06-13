@@ -7,6 +7,7 @@ public class main {
         if (fruitStore == null) {
             fruitStore = new FruitStore(storage);
         }
+        util.Console.clean();
         fruitStore.onHandler();
         System.out.println("已退出，感谢使用Fine水果店管理系统!");
     }

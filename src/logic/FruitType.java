@@ -15,12 +15,12 @@ public class FruitType implements Serializable {
         this.purchasePrice = purchasePrice;
     }
 
-    public String getName() {
-        return name;
+    public int getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getName() {
+        return name;
     }
 
     public float getPrice() {

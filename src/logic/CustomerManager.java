@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class CustomerManager implements Serializable {
     private int customerIdSeq = 0;
@@ -20,10 +21,10 @@ public class CustomerManager implements Serializable {
         }
     }
 
-    public Customer AddCustomer(String name, Customer.Type type) {
+    public Customer AddCustomer(FruitTypeManager fruitTypeManager, String name, Customer.Type type) {
         SimpleDateFormat sdt = new SimpleDateFormat("yyyyMMdd");
         String id = sdt.format(new Date()) + "-" + type.ordinal() + "-" + customerIdSeq++;
-        Customer customer = new Customer(id, name, type);
+        Customer customer = new Customer(fruitTypeManager, id, name, type);
         customers.add(customer);
         return customer;
     }
@@ -37,11 +38,20 @@ public class CustomerManager implements Serializable {
 
     public Customer getCustomerByName(String name) {
         for (Customer customer : customers) {
-            if (customer.getName() == name) {
+            if (customer.getName().equals(name)) {
                 return customer;
             }
         }
         return null;
+    }
+
+    // 展示购物车非空的用户
+    public void showShppingCustomer() {
+        for (Customer customer : customers) {
+            if (!customer.getShoppingCar().isEmpty()) {
+                customer.showWithShoppingCar();
+            }
+        }
     }
 }
 

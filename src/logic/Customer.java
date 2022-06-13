@@ -27,12 +27,14 @@ public class Customer implements Serializable {
     private String name;
     private Type type;
     private Account account;
+    private FruitManager shoppingCar;
 
-    public Customer(String id, String name, Type type) {
+    public Customer(FruitTypeManager fruitTypeManager, String id, String name, Type type) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.account= new Account();
+        this.shoppingCar = new FruitManager(fruitTypeManager);
     }
 
     double getDistant() {
@@ -47,8 +49,19 @@ public class Customer implements Serializable {
         return account;
     }
 
+    public FruitManager getShoppingCar() {
+        return shoppingCar;
+    }
+
     @Override
     public String toString() {
         return "Id:" + id + " 名称:" + name + " 类型:" + type + " 账户余额:" + account;
+    }
+
+    public void showWithShoppingCar() {
+        System.out.println(this);
+        System.out.println("购物车:");
+        shoppingCar.show();
+        System.out.println("---------------------------");
     }
 }

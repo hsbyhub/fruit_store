@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 // 库存管理
 public class MenuFruitManager extends Menu {
-    FruitManager fruitManager;
+    private FruitManager fruitManager;
 
     public MenuFruitManager(FruitStore fruitStore) {
         super(fruitStore);

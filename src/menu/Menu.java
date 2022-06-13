@@ -13,7 +13,7 @@ public class Menu extends Option implements IMenu, Serializable {
 
     public Menu(FruitStore fruitStore) {
         super(fruitStore);
-        top = "===============" + name() + "===============";
+        top = "==============================" + name() + "==============================";
         bottom = "";
         for (int i = 0; i < top.length(); i++) {
             bottom += "=";
@@ -38,7 +38,11 @@ public class Menu extends Option implements IMenu, Serializable {
         while(!IsValidOption(opt)) {
             System.out.print("Select:");
             Scanner sc = new Scanner(System.in);
-            opt = sc.nextInt();
+            try {
+                opt = sc.nextInt();
+            }catch (Exception e) {
+
+            }
         }
         return opt;
     }
