@@ -55,13 +55,13 @@ public class Menu extends Option implements IMenu, Serializable {
     public String onHandler() {
         String res = null;
         while(true) {
-            if (res != null) {
-                System.out.println(res);
-            }
             System.out.println(top);
             showHeader();
             showOptions();
             System.out.println(bottom);
+            if (res != null) {
+                System.out.println(res);
+            }
             int opt = getOption();
             if (opt == 0) {
                 break;

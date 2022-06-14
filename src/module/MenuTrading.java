@@ -1,13 +1,9 @@
 package module;
 
-import logic.Customer;
-import logic.CustomerManager;
-import logic.FruitManager;
-import logic.FruitType;
+import logic.*;
 import menu.Menu;
 import menu.Option;
 
-import javax.crypto.spec.OAEPParameterSpec;
 import java.util.Scanner;
 
 public class MenuTrading extends Menu {
@@ -76,11 +72,11 @@ class OptionAddShopping extends Option {
         }
 
         FruitManager fruitCount = new FruitManager(getFruitStore().getFruitTypeManager());
-        boolean ok = fruitCount.AdjustFruit(fruitType.getId(), count);
+        boolean ok = fruitCount.addFruit(fruitType.getId(), count);
         if (!ok) {
             return "系统错误, 请联系管理员";
         }
-        ok = customer.getShoppingCar().AdjustFruit(fruitCount);
+        ok = customer.getShoppingCar().add(fruitCount);
         if (!ok) {
             return "添加到购物车失败";
         }
@@ -97,10 +93,12 @@ class OptionAddShopping extends Option {
 // 结账
 class OptionSettle extends Option {
     private CustomerManager customerManager;
+    private OrderManager orderManager;
 
     public OptionSettle(FruitStore fruitStore) {
         super(fruitStore);
         this.customerManager = fruitStore.getCustomerManager();
+        this.orderManager = fruitStore.getOrderManager();
     }
 
     @Override
@@ -115,24 +113,30 @@ class OptionSettle extends Option {
             return "找不到用户";
         }
 
-        String res = "交易成功\n";
-        res += customer.getShoppingCar() + "\n";
+        // 检查库存
+        FruitManager fruitManager = customer.getShoppingCar().clone();
+        if (fruitManager == null) {
+            return "系统错误";
+        }
+        if (!getFruitStore().getFruitStockManager().isEnough(fruitManager)) {
+            return "库存不足";
+        }
 
+        // 检查余额
         float distant = customer.getDistant();
         float amount = customer.getShoppingCar().getTotalValue() * distant / 10;
-        boolean ok = getFruitStore().getAccount().AdjustBalance(amount);
-        if (!ok) {
-            return "交易失败";
+        if (!customer.getAccount().isEnough(amount)) {
+            return "客户余额不足, 请提醒充值";
         }
-        ok = customer.getAccount().AdjustBalance(-amount);
-        if (!ok) {
-            getFruitStore().getAccount().AdjustBalance(-amount);
-            return "交易失败";
-        }
-        if (distant < 10) {
-            res += "折扣:" + distant + " ";
-        }
-        res += "实付:$" + amount;
+
+        // 开始交易
+        customer.getAccount().subBalance(amount);
+        customer.getShoppingCar().clear();
+        getFruitStore().getAccount().addBalance(amount);
+        getFruitStore().getFruitStockManager().sub(fruitManager);
+
+        Order order = orderManager.addOrder(customer, fruitManager, distant, amount);
+        String res = "交易成功\n" + order;
         return res;
     }
 

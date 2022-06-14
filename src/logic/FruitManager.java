@@ -6,49 +6,76 @@ import java.util.Map;
 
 public class FruitManager implements Serializable {
     private FruitTypeManager fruitTypeManager;
-    private HashMap<Integer, Integer> fruit_count;
+    private HashMap<Integer, Integer> fruitCount;
 
     public FruitManager(FruitTypeManager fruitTypeManager) {
         this.fruitTypeManager = fruitTypeManager;
-        fruit_count = new HashMap<>();
+        fruitCount = new HashMap<>();
     }
 
-    public boolean AdjustFruit(int id, int count) {
-        if (!fruit_count.containsKey(id)) {
-            if (count < 0) {
-                return false;
-            }
-            fruit_count.put(id, 0);
-        }
-        int tmp = fruit_count.get(id) + count;
-        if (tmp < 0) {
+    public boolean addFruit(int id, int count) {
+        if (count < 0) {
             return false;
         }
-        if (tmp == 0) {
-            fruit_count.remove(id);
-            return true;
+        Integer i = fruitCount.get(id);
+        if (i == null) {
+            fruitCount.put(id, count);
+        } else  {
+            fruitCount.replace(id, i + count);
         }
-        fruit_count.replace(id, tmp);
         return true;
     }
 
-    public boolean AdjustFruit(FruitManager fruitManager) {
-        for (Map.Entry entry : fruitManager.getFruit_count().entrySet()) {
-            boolean ok = AdjustFruit((int)entry.getKey(), (int)entry.getValue());
-            if (!ok) {
+    public boolean add(FruitManager fruitManager) {
+        for (Map.Entry entry : fruitManager.getFruitCount().entrySet()) {
+            addFruit((int)entry.getKey(), (int)entry.getValue());
+        }
+        return true;
+    }
+
+    boolean subFruit(int id, int count) {
+        if (count < 0) {
+            return false;
+        }
+        Integer i = fruitCount.get(id);
+        if (i == null || i < count) {
+            return false;
+        }
+        fruitCount.replace(id, i - count);
+        return true;
+    }
+
+    public boolean sub(FruitManager fruitManager) {
+        if (!isEnough(fruitManager)) {
+            return false;
+        }
+        for (Map.Entry entry : fruitManager.getFruitCount().entrySet()) {
+            subFruit((int)entry.getKey(), (int)entry.getValue());
+        }
+        return true;
+    }
+
+    public boolean isEnough(FruitManager fruitManager) {
+        for (Map.Entry entry : fruitManager.getFruitCount().entrySet()) {
+            if (getCount((int)entry.getKey()) < (int)entry.getValue()) {
                 return false;
             }
         }
         return true;
+
     }
 
-    public HashMap<Integer, Integer> getFruit_count() {
-        return fruit_count;
+    public HashMap<Integer, Integer> getFruitCount() {
+        return fruitCount;
+    }
+    
+    public int getCount(int id) {
+        return fruitCount.get(id);
     }
 
     public float getTotalValue() {
         float value = 0;
-        for (Map.Entry entry : fruit_count.entrySet()) {
+        for (Map.Entry entry : fruitCount.entrySet()) {
             FruitType fruitType = fruitTypeManager.getFruitType((int)entry.getKey());
             if (fruitType == null) {
                 continue;
@@ -59,20 +86,20 @@ public class FruitManager implements Serializable {
     }
 
     public void clear() {
-        fruit_count.clear();
+        fruitCount.clear();
     }
 
     public boolean isEmpty() {
-        return fruit_count.isEmpty();
+        return fruitCount.isEmpty();
     }
 
     @Override
     public String toString() {
         String res = "";
-        if (fruit_count.isEmpty()) {
+        if (fruitCount.isEmpty()) {
             res += "空\n";
         } else {
-            for (Map.Entry entry : fruit_count.entrySet()) {
+            for (Map.Entry entry : fruitCount.entrySet()) {
                 FruitType fruitType = fruitTypeManager.getFruitType((int)entry.getKey());
                 if (fruitType == null) {
                     continue;
@@ -82,5 +109,12 @@ public class FruitManager implements Serializable {
         }
         res += "总价值:" + String.format("%.2f", getTotalValue());
         return res;
+    }
+
+    @Override
+    public FruitManager clone() {
+        FruitManager fruitManager = new FruitManager(fruitTypeManager);
+        fruitManager.add(this);
+        return fruitManager;
     }
 }

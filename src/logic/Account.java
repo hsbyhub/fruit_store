@@ -6,17 +6,27 @@ import java.io.Serializable;
 public class Account implements Serializable {
     private float balance;
 
-    public boolean AdjustBalance(float count) {
-        float tmp = balance + count;
-        if (tmp < 0) {
+    public boolean addBalance(float count) {
+        if (count < 0) {
             return false;
         }
-        balance = tmp;
+        balance += count;
         return true;
     }
 
-    public float getBalance() {
-        return balance;
+    public boolean subBalance(float count) {
+        if (count < 0 || !isEnough(count)) {
+            return false;
+        }
+        balance -= count;
+        return true;
+    }
+
+    public boolean isEnough(float count) {
+        if (count < 0) {
+            return false;
+        }
+        return balance >= count;
     }
 
     @Override

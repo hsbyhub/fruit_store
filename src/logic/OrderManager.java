@@ -1,5 +1,8 @@
 package logic;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,9 +16,16 @@ public class OrderManager implements Serializable {
         orders = new ArrayList<>();
     }
 
-    public Order AddOrder(Customer customer, FruitManager fruitManager) {
-        Order order = new Order(generateOrderId++, customer, new Date(), fruitManager);
+    public Order addOrder(Customer customer, FruitManager fruitManager, float distant, float amount) {
+        Order order = new Order(generateOrderId++, customer, new Date(), fruitManager, distant, amount);
         orders.add(order);
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter(file));
+            out.write(order + "\n");
+            out.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
         return order;
     }
 

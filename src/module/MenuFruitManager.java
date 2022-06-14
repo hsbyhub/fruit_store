@@ -64,7 +64,7 @@ class OptionAddFruitStock extends Option {
         }catch (Exception e) {
             return "无效参数";
         }
-        boolean ok = fruitManager.AdjustFruit(id, count);
+        boolean ok = fruitManager.addFruit(id, count);
         if (!ok) {
             return "添加失败";
         }

@@ -77,6 +77,10 @@ class OptionRecharge extends Option {
         System.out.print("客户名:");
         Scanner sc = new Scanner(System.in);
         String name = sc.next();
+        Customer customer = customerManager.getCustomerByName(name);
+        if (customer == null) {
+            return "找不到客户, 请检查用户名";
+        }
         float amount = 0;
         try {
             System.out.print("充值金额:");
@@ -87,11 +91,7 @@ class OptionRecharge extends Option {
         } catch (Exception e) {
             return "非法金额";
         }
-        Customer customer = customerManager.getCustomerByName(name);
-        if (customer == null) {
-            return "找不到客户, 请检查用户名";
-        }
-        boolean ok = customer.getAccount().AdjustBalance(amount);
+        boolean ok = customer.getAccount().addBalance(amount);
         if (!ok) {
             return "充值失败";
         }
