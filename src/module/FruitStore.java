@@ -22,7 +22,6 @@ public class FruitStore extends Menu {
         this.orderManager = new OrderManager();
         this.account = new Account();
         registerOption(new MenuTrading(this));
-        registerOption(new MenuFruitTypeManager(this));
         registerOption(new MenuCustomerManager(this));
         registerOption(new MenuFruitManager(this));
     }
