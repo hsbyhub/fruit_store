@@ -30,6 +30,7 @@ public class Order implements Serializable {
         String res = "账单Id:" + id +
                 " " + customer +
                 " " + date + " \n" +
+                "水果:\n" +
                 fruitManager + "\n";
         if (distant < 10) {
             res += "折扣:" + distant + " ";
