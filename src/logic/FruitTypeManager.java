@@ -13,10 +13,6 @@ public class FruitTypeManager implements Serializable {
     }
 
     public void show() {
-        System.out.println("当前水果类型:");
-        for (Map.Entry entry : fruitTypes.entrySet()) {
-            System.out.println(entry.getValue());
-        }
     }
 
     public FruitType addFruitType(String name, float price, float purchasePrice) {
@@ -42,6 +38,15 @@ public class FruitTypeManager implements Serializable {
             }
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        String res = "";
+        for (Map.Entry entry : fruitTypes.entrySet()) {
+            res += entry.getValue();
+        }
+        return res;
     }
 }
 

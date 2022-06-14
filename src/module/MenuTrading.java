@@ -7,6 +7,7 @@ import logic.FruitType;
 import menu.Menu;
 import menu.Option;
 
+import javax.crypto.spec.OAEPParameterSpec;
 import java.util.Scanner;
 
 public class MenuTrading extends Menu {
@@ -16,6 +17,7 @@ public class MenuTrading extends Menu {
         super(fruitStore);
         this.customerManager = fruitStore.getCustomerManager();
         registerOption(new OptionAddShopping(fruitStore));
+        registerOption(new OptionSettle(fruitStore));
     }
 
     @Override
@@ -43,7 +45,7 @@ class OptionAddShopping extends Option {
         System.out.println("正在添加水果到购物车...");
         System.out.println("货架:");
         System.out.println("----------------------------");
-        getFruitStore().getFruitStockManager().show();
+        System.out.println(getFruitStore().getFruitStockManager());
         System.out.println("----------------------------");
         Scanner sc = new Scanner(System.in);
         Customer customer = null;
@@ -88,6 +90,54 @@ class OptionAddShopping extends Option {
 
     @Override
     public String name() {
-        return "添加购物车";
+        return "购物车添加水果";
+    }
+}
+
+// 结账
+class OptionSettle extends Option {
+    private CustomerManager customerManager;
+
+    public OptionSettle(FruitStore fruitStore) {
+        super(fruitStore);
+        this.customerManager = fruitStore.getCustomerManager();
+    }
+
+    @Override
+    public String onHandler() {
+        System.out.println("正在结算...");
+        customerManager.showShppingCustomer();
+        System.out.print("客户名:");
+        Scanner sc = new Scanner(System.in);
+        String name = sc.next();
+        Customer customer = customerManager.getCustomerByName(name);
+        if (customer == null) {
+            return "找不到用户";
+        }
+
+        String res = "交易成功\n";
+        res += customer.getShoppingCar() + "\n";
+
+        float distant = customer.getDistant();
+        float amount = customer.getShoppingCar().getTotalValue() * distant / 10;
+        boolean ok = getFruitStore().getAccount().AdjustBalance(amount);
+        if (!ok) {
+            return "交易失败";
+        }
+        ok = customer.getAccount().AdjustBalance(-amount);
+        if (!ok) {
+            getFruitStore().getAccount().AdjustBalance(-amount);
+            return "交易失败";
+        }
+        if (distant < 10) {
+            res += "折扣:" + distant + " ";
+        }
+        res += "实付:$" + amount;
+        return res;
+    }
+
+    @Override
+    public String name() {
+        return "购物车结算";
     }
 }

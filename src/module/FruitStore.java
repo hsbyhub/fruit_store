@@ -7,11 +7,11 @@ import java.io.*;
 
 public class FruitStore extends Menu {
     private String file;
+    Account account;
     FruitTypeManager fruitTypeManager;
     CustomerManager customerManager;
     FruitManager fruitStockManager;
     OrderManager orderManager;
-    Account account;
 
     public FruitStore(String file) {
         super(null);
@@ -26,6 +26,10 @@ public class FruitStore extends Menu {
         registerOption(new MenuFruitManager(this));
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
     public FruitTypeManager getFruitTypeManager() {
         return fruitTypeManager;
     }
@@ -38,6 +42,10 @@ public class FruitStore extends Menu {
         return fruitStockManager;
     }
 
+    public OrderManager getOrderManager() {
+        return orderManager;
+    }
+
     @Override
     public String name() {
         return "Fine水果店";
@@ -46,9 +54,9 @@ public class FruitStore extends Menu {
     @Override
     public void showHeader() {
         System.out.println("营收:" + account);
-        System.out.println("货架:");
         System.out.println("---------------------------------------------------------------");
-        fruitStockManager.show();
+        System.out.println("货架:");
+        System.out.println(getFruitStockManager());
         System.out.println("---------------------------------------------------------------");
     }
 
@@ -59,7 +67,6 @@ public class FruitStore extends Menu {
             fruitStore = (FruitStore)(is.readObject());
             is.close();
         } catch (Exception e) {
-            System.out.println("从文件中恢复系统失败, 将重新初始化系统");
         }
         return fruitStore;
     }

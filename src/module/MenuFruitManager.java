@@ -28,7 +28,7 @@ public class MenuFruitManager extends Menu {
     @Override
     public void showHeader() {
         System.out.println("当前库存:");
-        fruitManager.show();
+        System.out.println(fruitManager);
     }
 }
 
@@ -45,7 +45,8 @@ class OptionAddFruitStock extends Option {
     @Override
     public String onHandler() {
         System.out.println("正在添加库存...");
-        fruitTypeManager.show();
+        System.out.println("当前水果类型:");
+        System.out.println(fruitTypeManager);
         int id = -1;
         int count = 0;
         try {

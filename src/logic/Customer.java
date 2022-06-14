@@ -37,8 +37,8 @@ public class Customer implements Serializable {
         this.shoppingCar = new FruitManager(fruitTypeManager);
     }
 
-    double getDistant() {
-        return typeDistant.get(type) / 10.0;
+    public float getDistant() {
+        return typeDistant.get(type);
     }
 
     public String getName() {
@@ -61,7 +61,7 @@ public class Customer implements Serializable {
     public void showWithShoppingCar() {
         System.out.println(this);
         System.out.println("购物车:");
-        shoppingCar.show();
+        System.out.println(shoppingCar);
         System.out.println("---------------------------");
     }
 }

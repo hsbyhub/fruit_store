@@ -42,17 +42,6 @@ public class FruitManager implements Serializable {
         return true;
     }
 
-    public void show() {
-        for (Map.Entry entry : fruit_count.entrySet()) {
-            FruitType fruitType = fruitTypeManager.getFruitType((int)entry.getKey());
-            if (fruitType == null) {
-                continue;
-            }
-            System.out.println(fruitType + " 数量:" + entry.getValue() + " 价值:" + fruitType.getPrice() * (int)entry.getValue());
-        }
-        System.out.println("总价值:" + String.format("%.2f", getTotalValue()));
-    }
-
     public HashMap<Integer, Integer> getFruit_count() {
         return fruit_count;
     }
@@ -75,5 +64,23 @@ public class FruitManager implements Serializable {
 
     public boolean isEmpty() {
         return fruit_count.isEmpty();
+    }
+
+    @Override
+    public String toString() {
+        String res = "";
+        if (fruit_count.isEmpty()) {
+            res += "空\n";
+        } else {
+            for (Map.Entry entry : fruit_count.entrySet()) {
+                FruitType fruitType = fruitTypeManager.getFruitType((int)entry.getKey());
+                if (fruitType == null) {
+                    continue;
+                }
+                res += fruitType + " 数量:" + entry.getValue() + " 价值:" + fruitType.getPrice() * (int)entry.getValue() + "\n";
+            }
+        }
+        res += "总价值:" + String.format("%.2f", getTotalValue());
+        return res;
     }
 }
